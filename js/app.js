@@ -6,8 +6,8 @@ const cards = [
 {
   num: 1,
   image: "assets/images/pokemon1.png",
-  answers: ['Raichu', 'Charmander', 'Bulbasaur', 'Unicorn'],
- correctAnswer: 'Raichu'
+  answers: ['Eevee', 'Vulpix', 'Bulbasaur', 'Deer'],
+ correctAnswer: 'Eevee'
 },
 {
   num: 2,
@@ -67,13 +67,23 @@ const cards = [
 ]
 //END ARRAY
 
+const assignCard = () => {
+  document.getElementById('pokeImage').src = cards[0].image
 
-document.addEventListener('click', function(event){
-  if(event.target.id === "ans"){
-yourAns = document.getElementById(event.target.).innerHTML
+  for(let i = 0; i<cards[0].answers.length; i++){
+    document.getElementById(`ans${i+1}`).innerHTML = cards[0].answers[i].valueOf()
+  }
 
-})
+}
 
-// for(let i = 0; i< cards.length; i++){
-// console.log(cards)
-// }
+
+
+
+
+
+// document.addEventListener('click', function(event){
+//   if(event.target.classList.contains("ans")){
+// yourAns = document.getElementById(event.target).innerHTML
+//   }
+// })
+
