@@ -79,7 +79,6 @@ const assignCard =()=> {
 }
 }
 //END FUNCTION
-assignCard()
 
 //RESET FUNCTION
 const reset = () => {
@@ -96,7 +95,6 @@ document.addEventListener('click', event => {
   if (event.target.classList.contains("ans")) {
     yourAns = event.target.innerHTML
 
-   
     if (yourAns === cards[currentCard].correctAnswer) {
       alert("you're right!")
       console.log(currentCard++)
@@ -111,3 +109,4 @@ document.addEventListener('click', event => {
 
 })
 
+window.onload = assignCard()
