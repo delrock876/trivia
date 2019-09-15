@@ -1,6 +1,7 @@
 let correct = ""
 let yourAns = ""
 let score = 0
+let currentCard = 0
 
 //ARRAY OF POKEMON OBJECTS
 const cards = [
@@ -59,28 +60,30 @@ const cards = [
 //END ARRAY
 
 
-//Displays Object Info on Card
+// DISPLAYS OBJECT INFO ON CARD
 const assignCard = () => {
-  document.getElementById('pokeImage').src = cards[0].image
+  document.getElementById('pokeImage').src = cards[currentCard.valueOf()].image
   for (let i = 0; i < cards[0].answers.length; i++) {
-    document.getElementById(`ans${i + 1}`).innerHTML = cards[0].answers[i].valueOf()
+    document.getElementById(`ans${i + 1}`).innerHTML = cards[currentCard.valueOf()].answers[i].valueOf()
   }
 }
 assignCard()
 
-
-
-
-document.addEventListener('click', function (event) {
+//CHECKS YOUR ANSWER AGAINST CORRECT ANSWER
+document.addEventListener('click', event => {
   if (event.target.classList.contains("ans")) {
     yourAns = event.target.innerHTML
+    if (yourAns === cards[0].correctAnswer.valueOf()) {
+      alert("you're right!")
+      currentCard++
+      score++
+      assignCard()
+    } else if (yourAns !== cards[0].correctAnswer.valueOf()) {
+      alert('nope!')
+      currentCard++
+      assignCard()
+    }
   }
 
-  if(yourAns === cards[0].correctAnswer.valueOf()){
-alert("you're right!")
-score++
-  }else if(yourAns !== cards[0].correctAnswer.valueOf()){
-    alert('nope!')
-  }
 })
 
