@@ -12,13 +12,13 @@ const cards = [
   },
   {
     image: "assets/images/pokemon2.png",
-    answers: ['Great Ball', 'Master Ball', 'Ultra Ball', 'Super Ball'],
-    correctAnswer: 'Master Ball'
+    answers: ['Charizard', 'Torchic', 'Charmander', 'Fire Lizard'],
+    correctAnswer: 'Charmander'
   },
   {
     image: "assets/images/pokemon3.png",
-    answers: ['Six', 'Seven', 'Eight', 'Five'],
-    correctAnswer: 'Eight'
+    answers: ['Advanced Fire Lizard', 'Flareon', 'Entei', 'Charizard'],
+    correctAnswer: 'Charizard'
   },
   {
     image: "assets/images/pokemon4.png",
@@ -62,26 +62,29 @@ const cards = [
 
 // DISPLAYS OBJECT INFO ON CARD
 const assignCard = () => {
-  document.getElementById('pokeImage').src = cards[currentCard.valueOf()].image
-  for (let i = 0; i < cards[0].answers.length; i++) {
-    document.getElementById(`ans${i + 1}`).innerHTML = cards[currentCard.valueOf()].answers[i].valueOf()
+  document.getElementById('pokeImage').src = cards[currentCard].image
+  for (let i = 0; i < cards[currentCard].answers.length; i++) {
+    document.getElementById(`ans${i + 1}`).innerHTML = cards[currentCard].answers[i].valueOf()
   }
 }
 assignCard()
 
 //CHECKS YOUR ANSWER AGAINST CORRECT ANSWER
 document.addEventListener('click', event => {
+  
   if (event.target.classList.contains("ans")) {
     yourAns = event.target.innerHTML
-    if (yourAns === cards[0].correctAnswer.valueOf()) {
+    if (yourAns === cards[currentCard].correctAnswer) {
       alert("you're right!")
-      currentCard++
+      console.log(currentCard++)
       score++
       assignCard()
-    } else if (yourAns !== cards[0].correctAnswer.valueOf()) {
+    } else if (yourAns !== cards[currentCard].correctAnswer) {
       alert('nope!')
-      currentCard++
+      console.log(currentCard++)
       assignCard()
+    }else if (currentCard === cards.length-1){
+      alert('you finished')
     }
   }
 
