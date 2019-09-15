@@ -3,6 +3,7 @@ let yourAns = ""
 let score = 0
 let currentCard = 0
 
+
 //ARRAY OF POKEMON OBJECTS
 const cards = [
   {
@@ -60,19 +61,34 @@ const cards = [
 //END ARRAY
 
 
-// DISPLAYS OBJECT INFO ON CARD
-const assignCard = () => {
+// DISPLAY OBJECT INFO ON CARD FUNCTION
+const assignCard =()=> {
 
-  //displays image
+  if(currentCard < 10){
+
+    //displays image
   document.getElementById('pokeImage').src = cards[currentCard].image
-
+  
 //displays answers on buttons
   for (let i = 0; i < cards[currentCard].answers.length; i++) {
     document.getElementById(`ans${i + 1}`).innerHTML = cards[currentCard].answers[i]
   }
+}else {
+  alert('you ded')
+  reset()
 }
+}
+//END FUNCTION
 assignCard()
 
+//RESET FUNCTION
+const reset = () => {
+  currentCard = 0
+  yourAns = ""
+  score = 0
+  correct = ""
+  assignCard()
+}
 
 //CHECKS YOUR ANSWER AGAINST CORRECT ANSWER
 document.addEventListener('click', event => {
@@ -80,7 +96,7 @@ document.addEventListener('click', event => {
   if (event.target.classList.contains("ans")) {
     yourAns = event.target.innerHTML
 
-    if(currentCard < 10){
+   
     if (yourAns === cards[currentCard].correctAnswer) {
       alert("you're right!")
       console.log(currentCard++)
@@ -91,10 +107,6 @@ document.addEventListener('click', event => {
       console.log(currentCard++)
       assignCard()
     }
-
-  }else if (currentCard === 10){
-    alert('done')
-  }
   }
 
 })
