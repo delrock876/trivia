@@ -1,0 +1,15 @@
+.main-container {
+  margin: 0 auto;
+  height: 700px;
+  width: 700px;
+}
+
+.btnGroup {
+display: flex;
+justify-content: space-around;
+padding-top: 30px;
+}
+
+.card-title {
+  text-align: center;
+}

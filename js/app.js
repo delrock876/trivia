@@ -2,10 +2,9 @@ let correct = ""
 let yourAns = ""
 let score = 0
 let currentCard = 0
-let countDown = 5
+let currentGif = 0
 
-
-//ARRAY OF POKEMON OBJECTS
+//Array of pokemon object
 const cards = [
   {
     image: "assets/images/pokemon0.png",
@@ -59,11 +58,54 @@ const cards = [
     correctAnswer: 'Abra'
   }
 ]
-//END ARRAY
+
+//Object of gifs
+const gifs = {
+  correctGifs: ['assets/gifs/right1.gif', 'assets/gifs/right2.gif', 'assets/gifs/right3.gif', 'assets/gifs/right4.gif', 'assets/gifs/right5.gif'],
+  wrongGifs: ["assets/gifs/wrong1.gif", "assets/gifs/wrong2.gif", "assets/gifs/wrong3.gif", "assets/gifs/wrong4.gif", "assets/gifs/wrong5.gif"]
+}
+
+//
+const rightGif = () => {
+  if (currentGif < 5) {
+    document.getElementById("pokeModal").src = gifs.correctGifs[currentGif]
+    document.getElementById('rightwrong').innerHTML = `Correct!`
+    currentGif++
+  } else {
+    currentGif = 0
+  }
+}
+const wrongGif = () => {
+  if (currentGif < 5) {
+    document.getElementById("pokeModal").src = gifs.wrongGifs[currentGif]
+    document.getElementById('rightwrong').innerHTML = `Wrong!`
+    currentGif++
+  } else {
+    currentGif = 0
+  }
+}
+
+//Display Modal
+const displayCorrect = () => {
+  rightGif()
+  $(".modal").modal()
+  setTimeout(function () {
+    assignCard()
+    $(".modal").modal("hide")
+  }, 1500);
+}
+const displayWrong = () => {
+  wrongGif()
+  $(".modal").modal()
+  setTimeout(function () {
+    assignCard()
+    $(".modal").modal("hide")
+  }, 1500);
+}
 
 
 // DISPLAY OBJECT INFO ON CARD FUNCTION
-const assignCard = () => {
+const assignCard = _ => {
 
   if (currentCard < 10) {
 
@@ -75,7 +117,8 @@ const assignCard = () => {
       document.getElementById(`ans${i + 1}`).innerHTML = cards[currentCard].answers[i]
     }
   } else {
-    alert('you ded')
+
+    alert('Thanks for playing')
     reset()
   }
 }
@@ -89,13 +132,10 @@ const reset = () => {
   yourAns = ""
   score = 0
   correct = ""
+  currentGif = 0
   assignCard()
 }
 
-setInterval(function () {
-  assignCard()
-  currentCard++
-}, 5000);
 
 //CHECKS YOUR ANSWER AGAINST CORRECT ANSWER
 document.addEventListener('click', event => {
@@ -104,16 +144,13 @@ document.addEventListener('click', event => {
     yourAns = event.target.innerHTML
 
     if (yourAns === cards[currentCard].correctAnswer) {
-      alert("you're right!")
+      displayCorrect()
       currentCard++
-      assignCard()
       score++
     } else if (yourAns !== cards[currentCard].correctAnswer) {
-      alert('nope!')
+      displayWrong()
       currentCard++
-      assignCard()
     }
   }
 
 })
-

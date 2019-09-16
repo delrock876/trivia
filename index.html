@@ -9,19 +9,31 @@
 <link rel="stylesheet" href="assets/style.css">
   <title>Trivia</title>
 </head>
-<body>
-  <h1>Who's that Pokemon?</h1>
-
+<body background="assets/images/background.jpg">
+  
   <div class= 'main-container'>
 
+      <h1>Who's that Pokemon?</h1>
+
+      <!-- Hidden Modal -->
+      <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <h1 id="rightwrong"></h1>
+            <img id="pokeModal" src="" alt="">
+          </div>
+        </div>
+      </div>
+      <!-- End Modal-->
+    
 <div class="row">
-<div class="col-sm-6">
-<div class="card" style="width: 100%;">
+
+<div class="card" style="width: 80%;">
   <img id="pokeImage" src="..." class="card-img-top" alt="pokemon">
   <div class="card-body">
-    <h5 class="card-title">It's...</h5>
-    <p class="card-text"></p>
-
+    <h4 class="card-title">It's...</h4>
+    <div class= "btnGroup">
     <button type="button" id ="ans1" class="btn btn-outline-danger ans"></button>
     <button type="button" id ="ans2" class="btn btn-outline-danger ans"></button>
     <button type="button" id ="ans3" class="btn btn-outline-danger ans"></button>
@@ -29,30 +41,9 @@
   </div>
 </div>
 </div>
-</div>
-
-
-
 
 
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
