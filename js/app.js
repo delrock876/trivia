@@ -1,8 +1,9 @@
-let correct = ""
 let yourAns = ""
 let score = 0
 let currentCard = 0
 let currentGif = 0
+let sound = new Audio(`assets/sound.mp3`)
+
 
 //Array of pokemon object
 const cards = [
@@ -65,7 +66,7 @@ const gifs = {
   wrongGifs: ["assets/gifs/wrong1.gif", "assets/gifs/wrong2.gif", "assets/gifs/wrong3.gif", "assets/gifs/wrong4.gif", "assets/gifs/wrong5.gif"]
 }
 
-//
+
 const rightGif = () => {
   if (currentGif < 5) {
     document.getElementById("pokeModal").src = gifs.correctGifs[currentGif]
@@ -85,30 +86,29 @@ const wrongGif = () => {
   }
 }
 
-//Display Modal
+//Display Modal if Correct
 const displayCorrect = () => {
   rightGif()
   $(".modal").modal()
   setTimeout(function () {
     assignCard()
     $(".modal").modal("hide")
-  }, 1500);
+  }, 2000);
 }
+//Display modal if incorrect
 const displayWrong = () => {
   wrongGif()
   $(".modal").modal()
   setTimeout(function () {
     assignCard()
     $(".modal").modal("hide")
-  }, 1500);
+  }, 2000);
 }
 
 
-// DISPLAY OBJECT INFO ON CARD FUNCTION
+// Displays object info on cards
 const assignCard = _ => {
-
   if (currentCard < 10) {
-
     //displays image
     document.getElementById('pokeImage').src = cards[currentCard].image
 
@@ -117,17 +117,16 @@ const assignCard = _ => {
       document.getElementById(`ans${i + 1}`).innerHTML = cards[currentCard].answers[i]
     }
   } else {
-
     alert('Thanks for playing')
     reset()
   }
 }
-//END FUNCTION
 
 window.onload = assignCard()
 
-//RESET FUNCTION
+//Resets game
 const reset = () => {
+  sound.play()
   currentCard = 0
   yourAns = ""
   score = 0
@@ -136,8 +135,7 @@ const reset = () => {
   assignCard()
 }
 
-
-//CHECKS YOUR ANSWER AGAINST CORRECT ANSWER
+//Checks your answer against correct answer and displays corresponding gif ,
 document.addEventListener('click', event => {
 
   if (event.target.classList.contains("ans")) {
@@ -152,5 +150,4 @@ document.addEventListener('click', event => {
       currentCard++
     }
   }
-
 })
